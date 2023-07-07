@@ -44,13 +44,15 @@ test_run:	build_test
 	./test_run
 
 clean_test:
-	rm -f test_run
+	@rm -f test_run
+	@rm -f test/tester.o
 
 clean:
-	rm -rf $(BUILD_DIR)
+	@rm -rf $(BUILD_DIR)
 
 fclean:	clean clean_test
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "build done"
 
 re:	fclean all
 

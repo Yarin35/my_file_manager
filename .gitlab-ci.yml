@@ -1,0 +1,24 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - mkdir build
+    - gcc -o build/file_system src/main.c src/str_split.c src/my_calloc.c src/is_a_command.c src/prompt.c
+  artifacts:
+    paths:
+      - build/
+
+test:
+  stage: test
+  script:
+    - mkdir build
+    - gcc -o build/test_run src/str_split.c src/my_calloc.c src/is_a_command.c src/prompt.c test/tester.c -lcriterion --coverage
+    - ./build/test_run
+  artifacts:
+    paths:
+      - build/
+    reports:
+      junit: test_results.xml
